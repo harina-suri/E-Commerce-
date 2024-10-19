@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Accessories Collection</title>
+    <link rel="stylesheet" href="css/clothing.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">SHOPHERE</a>
+            <a href="clothing.html">Clothing</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for Clothing and Accessories">
+                <i class="fas fa-search"></i>
+            </div>
+            <a href="cart2.html" class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <div id="badge">0</div>
+            </a>
+            <a href="#" class="user-icon"><i class="fas fa-user-circle"></i></a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Accessories for Men and Women</h1>
+        <div class="product-list">
+            <div class="product-item" data-id="1">
+                <img src="img/ramie.PNG" alt="Brown Ramie Cotton Flat Cap">
+                <h2>Brown Ramie Cotton Flat Cap</h2>
+                <p>Rs 1099</p>
+                <button onclick="addToCart('Brown Ramie Cotton Flat Cap', 1099, 'img/ramie.PNG')">Add to Cart</button>
+            </div>
+            <div class="product-item" data-id="2">
+                <img src="img/cap.PNG" alt="Cap with contrast embroidery">
+                <h2>Cap with contrast embroidery</h2>
+                <p>Rs 999</p>
+                <button onclick="addToCart('Cap with contrast embroidery', 999, 'img/cap.PNG')">Add to Cart</button>
+            </div>
+            <div class="product-item" data-id="3">
+                <img src="img/beanie.PNG" alt="Black Short Knit Beanie">
+                <h2>Black Short Knit Beanie</h2>
+                <p>Rs 1500</p>
+                <button onclick="addToCart('Black Short Knit Beanie', 1500, 'img/beanie.PNG')">Add to Cart</button>
+            </div>
+            <div class="product-item" data-id="4">
+                <img src="img/bandana.PNG" alt="Paisley Print Bandanna Green">
+                <h2>Paisley Print Bandanna Green</h2>
+                <p>Rs 1699</p>
+                <button onclick="addToCart('Paisley Print Bandanna Green', 1699, 'img/bandana.PNG')">Add to Cart</button>
+            </div>
+            <div class="product-item" data-id="5">
+                <img src="img/tie.PNG" alt="Striped Jacquard Tie">
+                <h2>Striped Jacquard Tie</h2>
+                <p>Rs 1599</p>
+                <button onclick="addToCart('Striped Jacquard Tie', 1599, 'img/tie.PNG')">Add to Cart</button>
+            </div>
+            <div class="product-item" data-id="6">
+                <img src="img/leathercap.PNG" alt="Leather Cap">
+                <h2>Leather Cap</h2>
+                <p>Rs 2950</p>
+                <button onclick="addToCart('Leather Cap', 2950, 'img/leathercap.PNG')">Add to Cart</button>
+            </div>
+            <div class="product-item" data-id="7">
+                <img src="img/glasses.PNG" alt="Rectangular Sunglasses">
+                <h2>Rectangular Sunglasses</h2>
+                <p>Rs 1599</p>
+                <button onclick="addToCart('Rectangular Sunglasses', 1599, 'img/glasses.PNG')">Add to Cart</button>
+            </div>
+            <div class="product-item" data-id="8">
+                <img src="img/bowclip.PNG" alt="Satin Bow Hair Clip">
+                <h2>Satin Bow Hair Clip</h2>
+                <p>Rs 499</p>
+                <button onclick="addToCart('Satin Bow Hair Clip', 499, 'img/bowclip.PNG')">Add to Cart</button>
+            </div>
+            <div class="product-item" data-id="9">
+                <img src="img/earrings.PNG" alt="Floral Earrings">
+                <h2>Floral Earrings</h2>
+                <p>Rs 999</p>
+                <button onclick="addToCart('Floral Earrings', 999, 'img/earrings.PNG')">Add to Cart</button>
+            </div>
+            <div class="product-item" data-id="10">
+                <img src="img/keychain.PNG" alt="Leather Flower Key Ring">
+                <h2>Leather Flower Key Ring</h2>
+                <p>Rs 449</p>
+                <button onclick="addToCart('Leather Flower Key Ring', 449, 'img/keychain.PNG')">Add to Cart</button>
+            </div>
+        </div>      
+    </main>
+    <footer>
+        <p>&copy; 2024 ShopHere</p>
+    </footer>
+    <script>
+        // Function to initialize the cart badge number from localStorage
+        function updateCartBadge() {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            document.getElementById('badge').innerText = cartItems.length;
+        }
+
+        // Call this function when the page loads
+        window.onload = function() {
+            updateCartBadge();
+        }
+
+        // Function to add items to the cart
+        function addToCart(productName, productPrice, productImage) {
+            // Get the current cart items from localStorage (or initialize if empty)
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+            // Add the new item to the cart
+            cartItems.push({
+                name: productName,
+                price: productPrice,
+                image: productImage
+            });
+
+            // Save the updated cart back to localStorage
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+            // Update the cart badge with the new number of items
+            document.getElementById("badge").innerText = cartItems.length;
+
+            // Optionally, show a confirmation message
+            alert(`${productName} has been added to your cart!`);
+        }
+    </script>
+
+</body>
+</html>

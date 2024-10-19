@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="css/checkout.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+        }
+        .checkout-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .item-list {
+            flex: 1;
+            margin-right: 20px;
+        }
+        .total-amount {
+            flex: 0 0 300px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .item img {
+            width: 100px;
+            height: auto;
+            margin-right: 20px;
+        }
+        .place-order {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .place-order:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+        @media (max-width: 768px) {
+            .checkout-container {
+                flex-direction: column;
+            }
+            .item-list {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Checkout</h1>
+    <div class="checkout-container">
+        <div class="item-list" id="itemList">
+            <h2>Total Items: <span id="totalItems">0</span></h2>
+            <!-- Items will be populated here -->
+        </div>
+        <div class="total-amount">
+            <h2>Total Amount</h2>
+            <p>Amount: <span id="totalAmount">Rs 0</span></p>
+            <button class="place-order" onclick="placeOrder()">Place Order</button>
+        </div>
+    </div>
+
+    <script>
+        function loadCartItems() {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const itemList = document.getElementById('itemList');
+            const totalItems = document.getElementById('totalItems');
+            const totalAmount = document.getElementById('totalAmount');
+            
+            let totalCost = 0;
+            itemList.innerHTML = ''; // Clear previous items
+            
+            cartItems.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('item');
+                itemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div>
+                        <strong>${item.name} × 1</strong><br>
+                        Amount: Rs ${item.price}
+                    </div>
+                `;
+                itemList.appendChild(itemDiv);
+                totalCost += item.price;
+            });
+
+            totalItems.innerText = cartItems.length;
+            totalAmount.innerText = `Rs ${totalCost}`;
+        }
+
+        function placeOrder() {
+         alert('Order placed successfully!');
+        localStorage.removeItem('cartItems'); // Clear cart after placing order
+        window.location.href = 'order-success.html'; // Redirect to success page
+}
+
+
+        // Load cart items when the page loads
+        window.onload = loadCartItems;
+    </script>
+</body>
+</html>
